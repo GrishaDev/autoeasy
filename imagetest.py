@@ -3,7 +3,7 @@ import time
 
 time.sleep(2)
 
-pos = imagesearch("./pics/logino.png")
+pos = imagesearch("./pics/putty.png")
 if pos[0] != -1:
     print("position : ", pos[0], pos[1])
     pyautogui.moveTo(pos[0], pos[1])
