@@ -18,6 +18,8 @@ def start():
     print("What would you like to do?")
     while True:
         cmd = input()
+        if cmd == "exit":
+            break
         commandParse(cmd)
         print("Anything else?")
 

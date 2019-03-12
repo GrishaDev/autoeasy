@@ -31,6 +31,16 @@
                {"type":"find","pic":"pics/logino.png"},
                {"type":"click"}
         ]},
+    {"name":"win10mute",
+        "cmds":[{"type":"find","pic":"pics/win10mute/tray.png"},
+                {"type":"click"},
+                {"type":"wait","seconds":1},
+                {"type":"find","pic":"pics/win10mute/mute.png"},
+                {"type":"click"},
+                {"type":"wait","seconds":1},
+                {"type":"find","pic":"pics/win10mute/tray.png"},
+                {"type":"click"}
+        ]},
     {"name":"folder",
     "cmds":[{"type":"go","x":110,"y":230},
             {"type":"doubleclick"}]},
