@@ -18,10 +18,19 @@ help = "Welcome to automation of anything, type list to see available commands a
 
 # ===== methods: =====
 def start():
-    # keyboard.press(Key.cmd_l)
-    # keyboard.press('r')
-    # keyboard.release(Key.cmd_l)
-    # keyboard.release('r')
+
+    time.sleep(2)
+    # pyautogui.hotkey('command','shift','left') 
+    # pyautogui.hotkey('winleft', 'shiftleft', 'left')
+    # time.sleep(2)
+    # pyautogui.keyDown('winleft')
+    # pyautogui.keyDown('shift')
+    # pyautogui.press('left')
+    # time.sleep(0.5)
+    # pyautogui.keyUp('winleft')
+    # pyautogui.keyUp('shift')
+
+    # pyautogui.typewrite('Hello world!', interval=0.25)
 
     readConfig()
     print("What would you like to do?")
@@ -71,6 +80,8 @@ def executeCommands(cmds,repeat):
                 keyboard.type(cmds[i]['write'])
             elif(cmds[i]['type'] == "execute"):
                 commandParse(cmds[i]['execute'])
+            elif(cmds[i]['type'] == "findwait"):
+                findPictureWait(cmds[i]['pic'])
             else:
                 print("Error: didn't find "+cmds[i]['type']+" type on your shortcutList.json.")
         print("Finished iteration number "+str(x+1)+" out of "+str(repeat))
@@ -89,6 +100,21 @@ def executeKeys(keys):
         else:
             keyboard.release(eval(btn))
 
+def findPictureWait(path):
+    pos = imagesearch(path)
+    count = 0
+    seconds = 0
+    while pos[0] == -1:
+        time.sleep(0.01)
+        pos = imagesearch(path)
+        count = count + 1
+        if count >= 100:
+            seconds = seconds + 1
+            count = 0
+            print("Still Waiting for the picture to appear already..")
+    print("found! at position: ", pos[0], pos[1])
+    mouse.position = (pos[0]+OFFSET, pos[1]+OFFSET)
+    
 def findPicture(path):
     pos = imagesearch(path)
     if pos[0] != -1:
