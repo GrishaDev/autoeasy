@@ -21,7 +21,7 @@ help = "Welcome to automation of anything, type list to see available commands a
 # ===== methods: =====
 def start():
 
-    # time.sleep(2)
+    time.sleep(2)
     # pyautogui.hotkey('command','shift','left') 
     # pyautogui.hotkey('winleft', 'shiftleft', 'left')
     # time.sleep(2)
@@ -35,6 +35,14 @@ def start():
     # pyautogui.hotkey('shiftleft','winleft','left')
     # pyautogui.hotkey('ctrlleft','shiftleft','tab')
     # pyautogui.typewrite('Hello world!', interval=0.25)
+
+    # pyautogui.prompt('What is your name?')
+
+    # while True:
+    #     a = pyautogui.pixel(200,300)
+    #     green = a[1]
+    #     if green > 200:
+    #         pyautogui.click()
 
     readConfig()
     print("What would you like to do?")
