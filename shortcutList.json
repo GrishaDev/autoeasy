@@ -8,6 +8,11 @@
             {"type":"wait","seconds":1},
             {"type":"wait","seconds":1}
     ]},
+    {"name":"f5","repeat":5,
+    "cmds":[{"type":"wait","seconds":1},
+            {"type":"keys","keys":["Key.f5"]},
+            {"type":"wait","seconds":5}
+    ]},
     {"name":"reactionfull","repeat":1,
     "cmds":[{"type":"execute","execute":"chrome"},
             {"type":"write","write":"https://www.humanbenchmark.com/tests/reactiontime"},
@@ -52,10 +57,16 @@
             {"type":"find","pic":"pics/discord/chat.png"},
             {"type":"click"},
             {"type":"wait","seconds":0.5},
-            {"type":"write","write":"hahaha"},
+            {"type":"write","write":"I am not here! This is automatic message."},
             {"type":"keys","keys":["Key.enter"]},
             {"type":"find","pic":"pics/discord/minimize.png"},
             {"type":"click"}
+    ]},
+    {"name":"youtube","repeat":100,
+        "cmds":[{"type":"findwait","pic":"pics/youtube/youtubedark.png"},
+                {"type":"find","pic":"pics/chrome/tabclose.png"},
+                {"type":"wait","seconds":1},
+                {"type":"click"}
     ]},
     {"name":"logitechold","repeat":1,
     "cmds":[{"type":"go","x":1750,"y":1060},
@@ -106,10 +117,5 @@
                 {"type":"wait","seconds":1},
                 {"type":"keys","keys":["Key.enter"]},
                 {"type":"execute","execute":"f5"}
-        ]},
-    {"name":"f5","repeat":5,
-        "cmds":[{"type":"wait","seconds":1},
-                {"type":"keys","keys":["Key.f5"]},
-                {"type":"wait","seconds":5}
         ]}
 ]

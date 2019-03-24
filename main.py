@@ -12,6 +12,8 @@ keyboard = Kontroller()
 shortcutList = []
 
 OFFSET = 5
+PRECISION = .8
+
 help = "Welcome to automation of anything, type list to see available commands and exit to exit"
 # ==========
 
@@ -30,6 +32,8 @@ def start():
     # pyautogui.keyUp('winleft')
     # pyautogui.keyUp('shift')
 
+    # pyautogui.hotkey('shiftleft','winleft','left')
+    # pyautogui.hotkey('ctrlleft','shiftleft','tab')
     # pyautogui.typewrite('Hello world!', interval=0.25)
 
     readConfig()
@@ -101,26 +105,29 @@ def executeKeys(keys):
             keyboard.release(eval(btn))
 
 def findPictureWait(path):
-    pos = imagesearch(path)
+    print(path)
     count = 0
     seconds = 0
-    while pos[0] == -1:
+    while True:
         time.sleep(0.01)
-        pos = imagesearch(path)
-        count = count + 1
-        if count >= 100:
-            seconds = seconds + 1
-            count = 0
-            print("Still Waiting for the picture to appear already..")
-    print("found! at position: ", pos[0], pos[1])
-    mouse.position = (pos[0]+OFFSET, pos[1]+OFFSET)
+        try:
+            x,y = pyautogui.locateCenterOnScreen(path,confidence=PRECISION)
+            print("found! at position: ", x, y)
+            mouse.position = (x,y)
+            break
+        except:
+            count = count + 1
+            if count >= 100:
+                seconds = seconds + 1
+                count = 0
+                print("Still Waiting for the picture to appear already..")
     
 def findPicture(path):
-    pos = imagesearch(path)
-    if pos[0] != -1:
+    try:
+        pos = pyautogui.locateCenterOnScreen(path,confidence=PRECISION)
         print("found! at position: ", pos[0], pos[1])
-        mouse.position = (pos[0]+OFFSET, pos[1]+OFFSET)
-    else:
+        pyautogui.moveTo(pos[0], pos[1])
+    except:
         print("Error: didn't find "+str(path)+" on your screen.")
 
 def getnames():
