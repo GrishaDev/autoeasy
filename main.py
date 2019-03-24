@@ -12,16 +12,37 @@ keyboard = Kontroller()
 shortcutList = []
 
 OFFSET = 5
+PRECISION = .8
+
 help = "Welcome to automation of anything, type list to see available commands and exit to exit"
 # ==========
 
 
 # ===== methods: =====
 def start():
-    # keyboard.press(Key.cmd_l)
-    # keyboard.press('r')
-    # keyboard.release(Key.cmd_l)
-    # keyboard.release('r')
+
+    time.sleep(2)
+    # pyautogui.hotkey('command','shift','left') 
+    # pyautogui.hotkey('winleft', 'shiftleft', 'left')
+    # time.sleep(2)
+    # pyautogui.keyDown('winleft')
+    # pyautogui.keyDown('shift')
+    # pyautogui.press('left')
+    # time.sleep(0.5)
+    # pyautogui.keyUp('winleft')
+    # pyautogui.keyUp('shift')
+
+    # pyautogui.hotkey('shiftleft','winleft','left')
+    # pyautogui.hotkey('ctrlleft','shiftleft','tab')
+    # pyautogui.typewrite('Hello world!', interval=0.25)
+
+    # pyautogui.prompt('What is your name?')
+
+    # while True:
+    #     a = pyautogui.pixel(200,300)
+    #     green = a[1]
+    #     if green > 200:
+    #         pyautogui.click()
 
     readConfig()
     print("What would you like to do?")
@@ -71,6 +92,8 @@ def executeCommands(cmds,repeat):
                 keyboard.type(cmds[i]['write'])
             elif(cmds[i]['type'] == "execute"):
                 commandParse(cmds[i]['execute'])
+            elif(cmds[i]['type'] == "findwait"):
+                findPictureWait(cmds[i]['pic'])
             else:
                 print("Error: didn't find "+cmds[i]['type']+" type on your shortcutList.json.")
         print("Finished iteration number "+str(x+1)+" out of "+str(repeat))
@@ -89,12 +112,30 @@ def executeKeys(keys):
         else:
             keyboard.release(eval(btn))
 
+def findPictureWait(path):
+    print(path)
+    count = 0
+    seconds = 0
+    while True:
+        time.sleep(0.01)
+        try:
+            x,y = pyautogui.locateCenterOnScreen(path,confidence=PRECISION)
+            print("found! at position: ", x, y)
+            mouse.position = (x,y)
+            break
+        except:
+            count = count + 1
+            if count >= 100:
+                seconds = seconds + 1
+                count = 0
+                print("Still Waiting for the picture to appear already..")
+    
 def findPicture(path):
-    pos = imagesearch(path)
-    if pos[0] != -1:
+    try:
+        pos = pyautogui.locateCenterOnScreen(path,confidence=PRECISION)
         print("found! at position: ", pos[0], pos[1])
-        mouse.position = (pos[0]+OFFSET, pos[1]+OFFSET)
-    else:
+        pyautogui.moveTo(pos[0], pos[1])
+    except:
         print("Error: didn't find "+str(path)+" on your screen.")
 
 def getnames():
