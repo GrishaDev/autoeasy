@@ -21,7 +21,7 @@ help = "Welcome to automation of anything, type list to see available commands a
 # ===== methods: =====
 def start():
 
-    time.sleep(2)
+    # time.sleep(2)
     # pyautogui.hotkey('command','shift','left') 
     # pyautogui.hotkey('winleft', 'shiftleft', 'left')
     # time.sleep(2)
